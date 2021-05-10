@@ -1,23 +1,92 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext.kotlin_version = "1.4.30"
+    ext.nav_version = '2.2.1'
     repositories {
         google()
-        maven { url "https://plugins.gradle.org/m2/" }
+        jcenter()
     }
+
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
+    ext.server_url = 'BASE_URL'
 }
 
 allprojects {
     repositories {
-        google()
-        mavenCentral()
+        repositories {
+            google()
+            jcenter()
+            maven {
+                url 'https://dl.bintray.com/pokt-network/pocket-android'
+            }
+            maven { url "https://jitpack.io" }
+        }
+    }
+
+    ext {
+        koin_version = '2.1.5'
+        okhttp_version = '4.8.1'
+        retrofit_version = '2.9.0'
+        moshi_version = '1.9.2'
+        okhttp3Idling_version = '1.0.0'
+        kotlinCoroutines_version = '1.3.5'
+        androidLifecycle_version = '2.2.0'
+        androidXCore_version = '1.1.0'
+        androidXCore_version = '1.1.0'
+        appcompat_version = '1.1.0'
+        constraintLayout_version = '1.1.3'
+        recyclerView_version = '1.1.0'
+        androidx_swiperefreshlayout_version = '1.0.0'
+        navigation_version = '2.2.1'
+        annotation_version = '1.1.0'
+        material_version = '1.0.0'
+        androidLifecycle_version = '2.2.0'
+        picasso = '2.71828'
+
+        feature = [
+                domain     : project(':domain'),
+                resources  : project(':resources'),
+                fundaments: project(':fundaments')
+        ]
+
+        my_libs = [
+                koinViewModel: "org.koin:koin-androidx-viewmodel:$koin_version",
+                moshi        : "com.squareup.moshi:moshi-kotlin:$moshi_version",
+                moshiCodegen : "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
+        ]
+
+        kotlin_libs = [
+                stdlib    : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+                coroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutines_version"
+        ]
+
+        app_androidArch = [
+                lifecycle: "android.arch.lifecycle:extensions:$androidLifecycle_version"
+        ]
+
+        app_android = [
+                androidxCore      : "androidx.core:core-ktx:$androidXCore_version",
+                appcompat         : "androidx.appcompat:appcompat:$appcompat_version",
+                constraintLayout  : "androidx.constraintlayout:constraintlayout:$constraintLayout_version",
+                navigationUi      : "androidx.navigation:navigation-ui-ktx:$navigation_version",
+                navigationFragment: "androidx.navigation:navigation-fragment-ktx:$navigation_version",
+                annotation        : "androidx.annotation:annotation:$annotation_version",
+                recyclerView      : "androidx.recyclerview:recyclerview:$recyclerView_version",
+                swipe             : "androidx.swiperefreshlayout:swiperefreshlayout:$androidx_swiperefreshlayout_version",
+                material          : "com.google.android.material:material:$material_version",
+                picasso           : "com.squareup.picasso:picasso:$picasso"
+        ]
+
+        libs_network = [
+                okhttp           : "com.squareup.okhttp3:okhttp:$okhttp_version",
+                okhttpInterceptor: "com.squareup.okhttp3:logging-interceptor:$okhttp_version",
+                retrofit         : "com.squareup.retrofit2:retrofit:$retrofit_version",
+                retrofitConverter: "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+        ]
     }
 }
 
